@@ -89,8 +89,8 @@ function WeatherApp() {
                 cloud
               </div>
             </div>
-            <div className="flex xl:flex-row xl:space-x-22 flex-col xl:justify-center justify-center ">
-              <div className="text-xl font-semibold flex flex-row justify-center items-center xl:space-x-3 ">
+            <div className="flex xl:flex-row xl:space-x-22 flex-col xl:justify-center justify-center items-start xl:items-center ">
+              <div className="text-xl font-semibold flex flex-row justify-center items-center xl:space-x-3  pb-3">
                 <img
                   src={Humidity_icon}
                   className="mr-3 "
