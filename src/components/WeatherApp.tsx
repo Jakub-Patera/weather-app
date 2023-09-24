@@ -7,18 +7,24 @@ import Search_icon from "../assets/search.png";
 function WeatherApp() {
   const api_key = "dec191961fd56485973094690e9816d1";
 
-  const cityRef = useRef(null);
-  const humidityRef = useRef(null);
-  const windRef = useRef(null);
-  const tempRef = useRef(null);
-  const locationRef = useRef(null);
-  const skyRef = useRef(null);
+  const cityRef = useRef<HTMLInputElement | null>(null);
+const humidityRef = useRef<HTMLParagraphElement | null>(null);
+const windRef = useRef<HTMLParagraphElement | null>(null);
+const tempRef = useRef<HTMLParagraphElement | null>(null);
+const locationRef = useRef<HTMLParagraphElement | null>(null);
+const skyRef = useRef<HTMLParagraphElement | null>(null);
+//   const cityRef = useRef(null);
+//   const humidityRef = useRef(null);
+//   const windRef = useRef(null);
+//   const tempRef = useRef(null);
+//   const locationRef = useRef(null);
+//   const skyRef = useRef(null);
 
   const search = async () => {
-    if (!cityRef.current.value) {
+    if (!cityRef.current!.value) {
       return;
     }
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityRef.current.value}&units=Metric&appid=${api_key}`;
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityRef.current!.value}&units=Metric&appid=${api_key}`;
 
     let response = await fetch(url);
     let data = await response.json();
@@ -28,7 +34,6 @@ function WeatherApp() {
     tempRef.current.textContent = `${Math.round(data.main.temp)}°C`;
     locationRef.current.textContent = data.name;
     skyRef.current.textContent = `${data.weather[0].main}`;
-
   };
 
   return (
