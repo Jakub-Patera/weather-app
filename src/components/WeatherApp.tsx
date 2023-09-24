@@ -60,7 +60,7 @@ function WeatherApp() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-gradient-to-br from-[#12c2e9] to-[#2C5364] xl:h-50vh xl:w-80vw  h-40vh rounded-3xl shadow-2xl text-white p-4 pt-3">
+      <div className="flex flex-col justify-center items-center bg-gradient-to-br from-[#12c2e9] to-[#2C5364] xl:h-50vh xl:w-80vw 80vw 40vh rounded-3xl shadow-2xl text-white p-4 pt-3 mx-3">
         <div className="pt-4">
           <div className="flex justify-between items-center flex-col xl:mb-12  py-10 my-10">
             <div className="flex justify-between items-center">
@@ -89,8 +89,8 @@ function WeatherApp() {
                 cloud
               </div>
             </div>
-            <div className="flex xl:flex-row xl:space-x-22 flex-col space-y-6 xl:justify-center justify-start items-start xl:">
-              <div className="text-xl font-semibold flex flex-row justify-center items-center xl:space-x-3">
+            <div className="flex xl:flex-row xl:space-x-22 flex-col xl:justify-center justify-center ">
+              <div className="text-xl font-semibold flex flex-row justify-center items-center xl:space-x-3 ">
                 <img
                   src={Humidity_icon}
                   className="mr-3 "
