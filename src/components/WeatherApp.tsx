@@ -76,7 +76,7 @@ const weatherImageRef = useRef<HTMLImageElement | null>(null);
               </div>
             </div>
             <div className="flex flex-col justify-center items-center mb-12">
-              <img ref={weatherImageRef} className="w-50 h-50" alt="Weather Icon" />
+              <img ref={weatherImageRef}src={Cloud_icon} className="w-50 h-50" alt="Weather Icon" />
               <div className="text-xl font-semibold" ref={skyRef}>
   cloud
 </div>
