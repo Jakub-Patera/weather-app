@@ -86,7 +86,7 @@ function WeatherApp() {
                 alt="Weather Icon"
               />
               <div className="text-xl font-semibold" ref={skyRef}>
-                cloud
+                cloudy
               </div>
             </div>
             <div className="flex xl:flex-row xl:space-x-22 flex-col xl:justify-center justify-center items-start xl:items-center ">
