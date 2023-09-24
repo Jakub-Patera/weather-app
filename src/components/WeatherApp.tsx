@@ -115,12 +115,18 @@ function WeatherApp() {
             className="w-full rounded-3xl indent py-2 shadow-2xl text-black"
             placeholder="Search place..."
             autoComplete="off"
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                search();
+              }
+            }}
           />
           <button
             className="cursor-pointer bg-white rounded-full h-9 w-10 justify-center items-center p-2 shadow-2xl"
             onClick={() => {
               search();
             }}
+            
           >
             <img src={Search_icon} alt="Search Icon" />
           </button>
