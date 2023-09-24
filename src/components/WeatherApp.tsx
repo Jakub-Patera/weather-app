@@ -60,7 +60,7 @@ function WeatherApp() {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-gradient-to-br from-[#12c2e9] to-[#2C5364] xl:h-2/5 xl:w-3/5 w-5/6 h-3/5 rounded-3xl shadow-2xl text-white p-4 pt-3">
+      <div className="flex flex-col justify-center items-center bg-gradient-to-br from-[#12c2e9] to-[#2C5364] xl:h-50vh xl:w-80vw  h-40vh rounded-3xl shadow-2xl text-white p-4 pt-3">
         <div className="pt-4">
           <div className="flex justify-between items-center flex-col xl:mb-12  py-10 my-10">
             <div className="flex justify-between items-center">
