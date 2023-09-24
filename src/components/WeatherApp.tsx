@@ -3,6 +3,8 @@ import Clear_icon from "../assets/clear.png";
 import Humidity_icon from "../assets/humidity.png";
 import Wind_icon from "../assets/wind.png";
 import Search_icon from "../assets/search.png";
+import Rain_icon from "../assets/rain.png";
+import Cloud_icon from "../assets/cloud.png";
 
 function WeatherApp() {
   const api_key = "dec191961fd56485973094690e9816d1";
@@ -13,6 +15,7 @@ const windRef = useRef<HTMLParagraphElement | null>(null);
 const tempRef = useRef<HTMLParagraphElement | null>(null);
 const locationRef = useRef<HTMLParagraphElement | null>(null);
 const skyRef = useRef<HTMLParagraphElement | null>(null);
+const weatherImageRef = useRef<HTMLImageElement | null>(null);
 //   const cityRef = useRef(null);
 //   const humidityRef = useRef(null);
 //   const windRef = useRef(null);
@@ -34,7 +37,24 @@ const skyRef = useRef<HTMLParagraphElement | null>(null);
     tempRef.current!.textContent = `${Math.round(data.main.temp)}°C`;
     locationRef.current!.textContent = data.name;
     skyRef.current!.textContent = `${data.weather[0].main}`;
+    const weatherImage = getWeatherImage(data.weather[0].main);
+    if (weatherImage) {
+      weatherImageRef.current!.src = weatherImage;
+    }
   };
+
+  const getWeatherImage = (weather: string) => {
+    switch (weather.toLowerCase()) {
+      case "clear":
+        return Clear_icon;
+      case "rain":
+        return Rain_icon;
+      case "clouds":
+        return Cloud_icon;
+      default:
+        return null;
+    }
+  }
 
   return (
     <>
@@ -56,7 +76,7 @@ const skyRef = useRef<HTMLParagraphElement | null>(null);
               </div>
             </div>
             <div className="flex flex-col justify-center items-center mb-12">
-              <img src={Clear_icon} className="w-50 h-50" alt="Weather Icon" />
+              <img ref={weatherImageRef} className="w-50 h-50" alt="Weather Icon" />
               <div className="text-xl font-semibold" ref={skyRef}>
   cloud
 </div>
