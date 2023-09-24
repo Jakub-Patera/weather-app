@@ -29,11 +29,11 @@ const skyRef = useRef<HTMLParagraphElement | null>(null);
     let response = await fetch(url);
     let data = await response.json();
 
-    humidityRef.current.textContent = `${data.main.humidity}%`;
-    windRef.current.textContent = `${Math.round(data.wind.speed)} km/h`;
-    tempRef.current.textContent = `${Math.round(data.main.temp)}°C`;
-    locationRef.current.textContent = data.name;
-    skyRef.current.textContent = `${data.weather[0].main}`;
+    humidityRef.current!.textContent = `${data.main.humidity}%`;
+    windRef.current!.textContent = `${Math.round(data.wind.speed)} km/h`;
+    tempRef.current!.textContent = `${Math.round(data.main.temp)}°C`;
+    locationRef.current!.textContent = data.name;
+    skyRef.current!.textContent = `${data.weather[0].main}`;
   };
 
   return (
