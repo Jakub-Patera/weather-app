@@ -7,7 +7,7 @@ import Rain_icon from "../assets/rain.png";
 import Cloud_icon from "../assets/cloud.png";
 
 function WeatherApp() {
-  const api_key = "dec191961fd56485973094690e9816d1";
+  const api_key = import.meta.env.VITE_API_KEY;
 
   const cityRef = useRef<HTMLInputElement | null>(null);
   const humidityRef = useRef<HTMLParagraphElement | null>(null);
@@ -24,24 +24,36 @@ function WeatherApp() {
   //   const skyRef = useRef(null);
 
   const search = async () => {
-    if (!cityRef.current!.value) {
+    if (
+      !cityRef.current ||
+      !cityRef.current.value ||
+      !humidityRef.current ||
+      !windRef.current ||
+      !tempRef.current ||
+      !locationRef.current ||
+      !skyRef.current ||
+      !weatherImageRef.current
+    ) {
       return;
     }
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${
-      cityRef.current!.value
-    }&units=Metric&appid=${api_key}`;
 
-    let response = await fetch(url);
-    let data = await response.json();
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${cityRef.current.value}&units=Metric&appid=${api_key}`;
 
-    humidityRef.current!.textContent = `${data.main.humidity}%`;
-    windRef.current!.textContent = `${Math.round(data.wind.speed)} km/h`;
-    tempRef.current!.textContent = `${Math.round(data.main.temp)}°C`;
-    locationRef.current!.textContent = data.name;
-    skyRef.current!.textContent = `${data.weather[0].main}`;
-    const weatherImage = getWeatherImage(data.weather[0].main);
-    if (weatherImage) {
-      weatherImageRef.current!.src = weatherImage;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      humidityRef.current.textContent = `${data.main.humidity}%`;
+      windRef.current.textContent = `${Math.round(data.wind.speed)} km/h`;
+      tempRef.current.textContent = `${Math.round(data.main.temp)}°C`;
+      locationRef.current.textContent = data.name;
+      skyRef.current.textContent = `${data.weather[0].main}`;
+      const weatherImage = getWeatherImage(data.weather[0].main);
+      if (weatherImage) {
+        weatherImageRef.current.src = weatherImage;
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -66,10 +78,16 @@ function WeatherApp() {
             <div className="flex justify-between items-center">
               <div className="flex flex-row space-x-4">
                 <div className="text-4xl font-bold flex flex-col justify-center items-center">
-                  <p id="temp" ref={tempRef}>
+                  <p
+                    id="temp"
+                    ref={tempRef}
+                  >
                     32°C
                   </p>
-                  <p id="location" ref={locationRef}>
+                  <p
+                    id="location"
+                    ref={locationRef}
+                  >
                     London
                   </p>
                 </div>
@@ -85,7 +103,10 @@ function WeatherApp() {
                 className="w-50 h-50"
                 alt="Weather Icon"
               />
-              <div className="text-xl font-semibold" ref={skyRef}>
+              <div
+                className="text-xl font-semibold"
+                ref={skyRef}
+              >
                 cloudy
               </div>
             </div>
@@ -96,44 +117,56 @@ function WeatherApp() {
                   className="mr-3 "
                   alt="Humidity Icon"
                 />
-                <p id="humidity" ref={humidityRef}>
+                <p
+                  id="humidity"
+                  ref={humidityRef}
+                >
                   32%
                 </p>
               </div>
               <div className="text-xl font-semibold flex flex-row justify-center items-center xl:space-x-3">
-                <img src={Wind_icon} className="mr-3" alt="Wind Icon" />
-                <p id="wind" ref={windRef}>
+                <img
+                  src={Wind_icon}
+                  className="mr-3"
+                  alt="Wind Icon"
+                />
+                <p
+                  id="wind"
+                  ref={windRef}
+                >
                   12 km/h
                 </p>
               </div>
             </div>
-        <div className="flex justify-center items-center flex-row space-x-4 my-3 mb-4 mx-5 xl:mt-6">
-          <input
-            id="search-box-input"
-            ref={cityRef}
-            type="text"
-            className="w-full rounded-3xl indent py-2 shadow-2xl text-black"
-            placeholder="Search place..."
-            autoComplete="off"
-            onKeyPress={(event) => {
-              if (event.key === "Enter") {
-                search();
-              }
-            }}
-          />
-          <button
-            className="cursor-pointer bg-white rounded-full h-9 w-10 justify-center items-center p-2 shadow-2xl"
-            onClick={() => {
-              search();
-            }}
-            
-          >
-            <img src={Search_icon} alt="Search Icon" />
-          </button>
-        </div>
-      </div>
+            <div className="flex justify-center items-center flex-row space-x-4 my-3 mb-4 mx-5 xl:mt-6">
+              <input
+                id="search-box-input"
+                ref={cityRef}
+                type="text"
+                className="w-full rounded-3xl indent py-2 shadow-2xl text-black"
+                placeholder="Search place..."
+                autoComplete="off"
+                onKeyPress={(event) => {
+                  if (event.key === "Enter") {
+                    search();
+                  }
+                }}
+              />
+              <button
+                className="cursor-pointer bg-white rounded-full h-9 w-10 justify-center items-center p-2 shadow-2xl"
+                onClick={() => {
+                  search();
+                }}
+              >
+                <img
+                  src={Search_icon}
+                  alt="Search Icon"
+                />
+              </button>
+            </div>
           </div>
         </div>
+      </div>
     </>
   );
 }
